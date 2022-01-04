@@ -18,7 +18,7 @@ class Question(TimeStampModel):
 
 class Answer(TimeStampModel):
     uuid = models.UUIDField(db_index=True, default=uuid_lib.uuid4, editable=False)
-    body = models.TimeField()
+    body = models.TextField()
     question = models.ForeignKey(
         Question, on_delete=models.CASCADE, related_name="answers"
     )

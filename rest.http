@@ -34,3 +34,33 @@ Authorization: token {{token}}
     "username": "{{username}}",
     "password": "{{password}}"
 }
+### Get Questions
+GET {{host}}/api/v1/questions/second-one-how-is-everyone-Un1bksgw/
+Authorization: token {{token}}
+
+###Post Question
+POST  {{host}}/api/v1/questions/second-one-how-is-everyone-Un1bksgw/answer/
+Authorization: token {{token}}
+Content-Type: application/json
+
+{
+    "body": "This is Bobs answer"
+}
+
+###Get Answers
+GET {{host}}/api/v1/questions/second-one-how-is-everyone-Un1bksgw/answers/
+Authorization: token {{token}}
+Content-Type: application/json
+
+# {
+#     "body": "This is Bobs answer"
+# }
+
+###Up Date Anwser
+PUT {{host}}/api/v1/answers/5bae00f3-1771-4766-8c5b-b399dc94a1e3/
+Authorization: token {{token}}
+Content-Type: application/json
+
+{
+    "body": "This is Bobs answer, and some more answers!!!"
+}
