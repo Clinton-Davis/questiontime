@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div v-if="questions" class="container pt-4">
-      <div v-for="q in questions" :key="q.id" class="">
+      <div v-for="q in questions" :key="q.uuid" class="">
         <div class="card shadow p-1 mb-3 bg-body rounded-15">
           <div class="card-body">
             <p>
@@ -11,6 +11,24 @@
             <p class="mb-0">Answers: {{ q.answers_count }}</p>
           </div>
         </div>
+      </div>
+      <div class="my-4 d-grid gap-2 col-6 mx-auto w-25">
+        <button
+          v-if="!loading"
+          @click="getQuestions"
+          v-show="next"
+          class="btn btn-primary shadow"
+        >
+          Load More
+        </button>
+        <button v-else class="btn btn-primary" type="button" disabled>
+          <span
+            class="spinner-border spinner-border-sm shadow"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          Loading...
+        </button>
       </div>
     </div>
   </div>
@@ -24,9 +42,10 @@ export default {
 <script setup>
 import { axios } from "../common/api.service.js";
 import { ref, onBeforeMount } from "vue";
-// import { capitalizeFirstLetter } from "../scripts/helpers.js";
 
 let questions = ref([]);
+let next = ref(null);
+let loading = ref(false);
 
 onBeforeMount(() => {
   getQuestions();
@@ -34,9 +53,21 @@ onBeforeMount(() => {
 
 async function getQuestions() {
   let endpoint = "/api/v1/questions/";
+  if (next.value) {
+    console.log(next.value);
+    endpoint = next.value;
+  }
+  loading.value = true;
   try {
     const response = await axios.get(endpoint);
-    return (questions.value = response.data);
+    questions.value.push(...response.data.results);
+    if (response.data.next) {
+      next.value = response.data.next;
+      loading.value = false;
+    } else {
+      next.value = null;
+      loading.value = false;
+    }
   } catch (error) {
     console.error(error.response);
   }
@@ -45,7 +76,8 @@ async function getQuestions() {
 
 <style scoped>
 .home {
-  height: 100vh;
+  height: fit-content;
+  padding-bottom: 1rem;
   background-color: #4158d0;
   background-image: linear-gradient(
     43deg,
