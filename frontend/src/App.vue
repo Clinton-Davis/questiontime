@@ -17,7 +17,17 @@ import Navbar from "./components/Navbar.vue";
 body {
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 300;
+  height: fit-content;
+  padding-bottom: 1rem;
+  background-color: #4158d0;
+  background-image: linear-gradient(
+    43deg,
+    #4158d0 0%,
+    #c850c0 46%,
+    #ffcc70 100%
+  );
 }
+
 .btn:focus {
   box-shadow: none !important;
 }
