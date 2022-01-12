@@ -5,9 +5,17 @@
         <div class="card shadow p-1 mb-3 bg-body rounded-15">
           <div class="card-body">
             <p>
-              Posted by: <span class="questin-author">{{ q.author }}</span>
+              Posted by: <span class="question-author">{{ q.author }}</span>
             </p>
-            <h2>{{ q.content }}</h2>
+            <h2>
+              <router-link
+                :to="{ name: 'question', params: { slug: q.slug } }"
+                class="question-link"
+              >
+                {{ q.content }}
+              </router-link>
+            </h2>
+
             <p class="mb-0">Answers: {{ q.answers_count }}</p>
           </div>
         </div>
@@ -42,6 +50,7 @@ export default {
 <script setup>
 import { axios } from "../common/api.service.js";
 import { ref, onBeforeMount } from "vue";
+import { setPageTitle } from "../scripts/helpers";
 
 let questions = ref([]);
 let next = ref(null);
@@ -49,6 +58,7 @@ let loading = ref(false);
 
 onBeforeMount(() => {
   getQuestions();
+  setPageTitle("Question Time");
 });
 
 async function getQuestions() {
@@ -86,7 +96,18 @@ async function getQuestions() {
     #ffcc70 100%
   );
 }
-.questin-author {
+.question-link {
+  font-weight: 500;
+  color: black;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+.question-link:hover,
+.question-link:active {
+  color: #160288;
+  text-decoration: none;
+}
+.question-author {
   color: #5557ce;
   text-transform: capitalize;
   font-weight: 500;
