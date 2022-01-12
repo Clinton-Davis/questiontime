@@ -38,11 +38,11 @@ export default {
 .navbar-brand {
   font-weight: bold;
   font-size: 1.7rem;
-  -webkit-text-stroke: 0.001rem rgb(57, 4, 247);
+  -webkit-text-stroke: 0.001rem #3904f7;
 }
 .navbar-brand:hover,
 .navbar-brand:active {
-  -webkit-text-stroke: 0.001rem rgb(255, 255, 255);
+  -webkit-text-stroke: 0.001rem #ffffff;
   color: #fd0019;
 }
 </style>

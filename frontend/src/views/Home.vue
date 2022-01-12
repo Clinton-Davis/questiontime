@@ -50,6 +50,7 @@ export default {
 <script setup>
 import { axios } from "../common/api.service.js";
 import { ref, onBeforeMount } from "vue";
+import { setPageTitle } from "../scripts/helpers";
 
 let questions = ref([]);
 let next = ref(null);
@@ -57,6 +58,7 @@ let loading = ref(false);
 
 onBeforeMount(() => {
   getQuestions();
+  setPageTitle("Question Time");
 });
 
 async function getQuestions() {
@@ -82,7 +84,7 @@ async function getQuestions() {
 }
 </script>
 
-<style>
+<style scoped>
 .home {
   height: fit-content;
   padding-bottom: 1rem;
