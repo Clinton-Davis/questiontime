@@ -86,6 +86,7 @@ async function getQuestions() {
 
 <style scoped>
 .home {
+  min-height: 88.5vh;
   height: fit-content;
   padding-bottom: 1rem;
   background-color: #4158d0;
