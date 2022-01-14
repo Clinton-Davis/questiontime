@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark my-navbar">
+  <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary my-navbar">
     <div class="container">
       <router-link class="navbar-brand" :to="{ name: 'home' }"
         >Questions Time</router-link
@@ -17,10 +17,15 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a href="/accounts/logout/" class="btn btn-outline-primary"
-              >Logout</a
+          <li class="nav-item mx-3">
+            <router-link
+              :to="{ name: 'question-editor' }"
+              class="btn btn-warning shadow"
+              >Ask A Question</router-link
             >
+          </li>
+          <li class="nav-item mr-1">
+            <a href="/accounts/logout/" class="btn btn-danger shadow">Logout</a>
           </li>
         </ul>
       </div>

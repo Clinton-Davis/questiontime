@@ -184,10 +184,6 @@ section {
 .card {
   background-color: whitesmoke;
 }
-.error {
-  font-weight: bold;
-  color: red;
-}
 
 .answer-added {
   font-weight: bold;

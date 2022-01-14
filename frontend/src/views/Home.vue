@@ -117,7 +117,4 @@ async function getQuestions() {
 .questin-author:active {
   color: #f79b07;
 }
-.rounded-15 {
-  border-radius: 15px;
-}
 </style>

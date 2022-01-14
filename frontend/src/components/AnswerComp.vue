@@ -1,5 +1,5 @@
 <template>
-  <div class="card shadow p-3">
+  <div class="card shadow p-3 rounded-15">
     <p class="bigerTest" style="white-space: pre-wrap">{{ answer.body }}</p>
     <p class="text-muted mb-0">
       <strong class="question-author">{{ answer.author }}</strong> &rarr;

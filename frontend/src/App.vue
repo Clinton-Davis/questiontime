@@ -32,6 +32,15 @@ body {
   box-shadow: none !important;
 }
 
+.error {
+  font-weight: bold;
+  color: red;
+}
+
+.rounded-15 {
+  border-radius: 15px;
+}
+
 @-webkit-keyframes fadeIn {
   0% {
     opacity: 0;
