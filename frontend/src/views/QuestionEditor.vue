@@ -33,7 +33,16 @@ export default {
 import { ref, onBeforeMount, watch } from "vue";
 import { axios } from "../common/api.service.js";
 import { setPageTitle } from "../scripts/helpers";
-import { useRouter } from "vue-router";
+import { useRouter, onBeforeRouteUpdate } from "vue-router";
+
+/*eslint-disable */
+const props = defineProps({
+  slug: {
+    type: String,
+    required: false,
+  },
+});
+/*eslint-enable */
 
 const router = useRouter();
 let questionBody = ref(null);
@@ -41,7 +50,7 @@ let error = ref(null);
 let chars = ref(0);
 
 onBeforeMount(() => {
-  setPageTitle("Ask a Question");
+  setPageTitle("Editor - Question Time");
 });
 
 watch(questionBody, () => {
@@ -79,6 +88,22 @@ function onSubmit() {
     }
   }
 }
+
+onBeforeRouteUpdate(async (to, from, next) => {
+  if (to.params.slug !== undefined && to.params.slug !== "") {
+    const endpoint = `/api/v1/questions/${to.params.slug}/`;
+    try {
+      const response = await axios.get(endpoint);
+      console.log(response.data.content);
+      return next((vm) => (vm.questionBody = response.data.content));
+    } catch (er) {
+      console.error(er);
+      const error = er.response.statusText;
+    }
+  } else {
+    return next();
+  }
+});
 </script>
 
 <style scoped>

@@ -18,7 +18,7 @@ const routes = [
     props: true,
   },
   {
-    path: "/ask/",
+    path: "/ask/:slug?", // '?' Make the slug optional
     name: "question-editor",
     component: () =>
       import(
