@@ -3,7 +3,7 @@
     <div class="container">
       <div class="card shadow">
         <div class="card-body">
-          <h1 class="mb-3">Ask a Question</h1>
+          <h1 class="mb-3">Edit your Question</h1>
           <form @submit.prevent="onSubmit">
             <textarea
               class="form-control"
@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  name: "question-editor",
+  name: "editor",
 };
 </script>
 <script setup>
@@ -43,21 +43,34 @@ const props = defineProps({
   },
 });
 /*eslint-enable */
-console.log(props.slug);
 
+let slug = ref(props.slug);
 const router = useRouter();
 let questionBody = ref(null);
 let error = ref(null);
 let chars = ref(0);
 
 onBeforeMount(() => {
-  setPageTitle("Editor - Question Time");
+  getQuestionData();
 });
 
 watch(questionBody, () => {
   chars.value = questionBody.value.length;
   console.log(chars.value);
 });
+
+async function getQuestionData() {
+  const endpoint = `/api/v1/questions/${slug.value}/`;
+  try {
+    const response = await axios.get(endpoint);
+    questionBody.value = response.data.content;
+    setPageTitle("Edit " + response.data.content);
+  } catch (error) {
+    console.error(error);
+    const title = "404 - Not Found!";
+    setPageTitle(title);
+  }
+}
 
 function onSubmit() {
   if (!questionBody.value) {

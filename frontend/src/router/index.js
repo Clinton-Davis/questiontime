@@ -18,12 +18,19 @@ const routes = [
     props: true,
   },
   {
-    path: "/ask/:slug?", // '?' Make the slug optional
+    path: "/ask/",
     name: "question-editor",
     component: () =>
       import(
         /* webpackChunkName: "question-editor" */ "../views/QuestionEditor.vue"
       ),
+    props: true,
+  },
+  {
+    path: "/ask/:slug", // '?' Make the slug optional
+    name: "editor",
+    component: () =>
+      import(/* webpackChunkName: "editor" */ "../views/Editor.vue"),
     props: true,
   },
 ];
